@@ -216,7 +216,7 @@ View = {
 		var p2name=document.getElementById("p2name").innerHTML=arr[0].p2name;
 		var pturn=document.getElementById("turn").innerHTML=arr[0].currentturn;
 		var lost=document.getElementById("lost").innerHTML=arr[0].pieceslost;
-console.log(arr[0].Playerturn);
+		player=arr[0].Playerturn;
 		player=arr[0].Playerturn;
 		p1name="arr[0].p1name";
 		p2name=arr[0].p2name;
@@ -227,9 +227,9 @@ console.log(arr[0].Playerturn);
 
 	},
 	resetter: function () {
-//		Model.reset();
-		View.UpdateState();
-		alert("this Button is in progress but calls update game state and Model.reset");
+//
+		View.init();
+		//alert("this Button is in progress but calls update game state and Model.reset");
 	}
 };
 
@@ -258,8 +258,22 @@ function animate(){
 window.onload=View.init;	
 
 setName=function(){
-	var t=document.getElementById("inputb");
-	alert(t);
+
+    console.log("setName called, setting name");
+	var select=document.getElementById("selected").value;
+    var input=document.getElementById("inputb").value;
+    console.log(" select Value "+select);
+    console.log(" input Value "+input);
+	if(select=="P1")
+    {
+        document.getElementById("p1name").innerHTML=input;
+    }else if(select=="P2")
+    {console.log("P");
+        document.getElementById("p2name").innerHTML=input;
+    }
+
+
+	//alert(t);
 	
 };
 changeTurn=function(){

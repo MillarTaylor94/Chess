@@ -16,7 +16,7 @@
 <h1>Game Grid</h1>
 
 </div>
-<div id="aboutwrap">
+<div class="wrapper">
 
 
 <nav id="navsize2">
@@ -49,35 +49,37 @@
 <div id="gameState"class="gamestate">
 <br>
 <ul>
-<li><span>Player:<span id="play" class="gamestate"> </span></span></li>
-<li><span>Current turn:<span id="turn" class="gamestate">  </span></span>
-</li>
-<li>Pieces Lost:<span id="lost" class="gamestate"></span></li>
-<li>P1 Name:<span id="p1name" class="gamestate"></span></li>
-<li>P2 Name:<span id="p2name" class="gamestate"></span></li>
+<li>Player:<span id="play" ></span></li>
+<li>Current turn:<span id="turn"></span></li>
+<li>Pieces Lost:<span id="lost"></span></li>
+<li>P1 Name:<span id="p1name"></span></li>
+<li>P2 Name:<span id="p2name"></span></li>
 
 </ul>
-
-<div id="Pinput">
-Set <select><option value="P1">P1</option><option value="P2">P2</option></select>name: <input type="text" name="Name" id="inputb"><br>
-<input id="enter"  value="click" type="button" onclick="setName;">
-<input id="reset" value="reset game" type="button" onclick="View.resetter();">
-
-</div>
-    <div id="clicklocation"></div>
+    <div id="reset" >
 <div id="grid" class="griddiv">
 
 </div><!--griddiv end-->
-
+    <input id="reset" value="reset game" type="button" onclick="View.resetter();">
+    </div>
 <img id="rock" src="rock.png"/>
 </div>
+    <div id="Pinput">
+        Set <select id="selected"><option value="P1">P1</option><option value="P2">P2</option></select>name: <input type="text" name="Name" id="inputb"><br>
+        <input id="enter"  value="Change Name" type="button" onclick=setName()>
 
+
+    </div>
 </div>
 
 
+<footer>
 
+    <p> T&J Limited</p>
+    <p> 2015</p>
+
+</footer>
 </body>
 
 </html>
 
-window.onload=View.init();

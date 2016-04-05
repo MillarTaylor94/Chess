@@ -6,12 +6,15 @@ body{
 	background-color:grey;
 	
 }
-p.desc{
+th, td{
+	border:1px solid red;
+}
+.desc{
 color:red;
 font-size:32px;
 
 }
-p.fonts{
+.font{
 	color:red;
 	font-size:24px;
 }
@@ -57,22 +60,18 @@ a{  color:black;
 	background-color:red;
 	border:solid black 1px;
 	border-radius:5px;
+
 	}
-#tabledesc{
+.tabledesc{
 	margin:auto;
 	margin-bottom:30px;
-	background-color:grey;
+	background-color:orange;
 	border:solid;
 	border-color:red;
-	
-}
-
-#head{
-	width: 800px;
-height: 300px;
-border: 5px red;
+	color:black;
 
 }
+
 /*used for the description pade header*/
 #deswrapper{
 	background-image:url("chessbackground.jpg");
@@ -86,23 +85,12 @@ border: 5px red;
 	border:3px solid red;
 	
 }
-#aboutwrap{
+/*main page header wrapper*/
+.wrapper{
 	position:relative;
 	width:auto;
 	height:auto;
-	background-color:black;
-	border:2px solid red;
-	margin-top:30px;
-	border-radius: 25px;
-	border:3px solid red;
-	
-}
-/*main page header wrapper*/
-#wrapper{
-	
-	width:auto;
-	height:200px;
-	margin-top:30px;
+	margin-top:20px;
 	background-color:black;
 	border-radius: 25px;
 	border:3px solid red;
@@ -130,7 +118,7 @@ top:0px;
 
 	width:80%;
 	height:auto;
-	
+	color:red;
 }
 #rock{
 	left:70px;
@@ -179,14 +167,6 @@ top:0px;
 	height:auto;
 	background-color: black;
 }
-/*red border*/
-.redb{
-border-radius: 25px;
-	border:2px solid red;
-    background-color:black;
- 
-}
-
 /*used for table*/
 .red{
 	background-color:red;

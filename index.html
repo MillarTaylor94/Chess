@@ -1,11 +1,9 @@
 <!DOCTYPE HTML>
 <!--about-->
 <head>
-<style>
-th, td{
-border:1px solid red;
-}</style>
 
+ <style>
+  </style>
 
 <link rel="stylesheet" type="text/css" href="GamePage.css">
 <script type="text/javascript" src="Ajax.js"></script>
@@ -16,11 +14,7 @@ border:1px solid red;
 </div>
 
 
-
-
-
-
-<div id="wrapper" style="height:auto" class="redb">
+<div class="wrapper" >
 <h2><b>Game Description</b></h2>
 <hr>
 <div id="navsize2">
@@ -49,7 +43,7 @@ border:1px solid red;
 <!-------------------Rules---------------->
 <div style="margin-left:20%">
 <p class="desc"><b>Goal:</b></p>
-<p class="fonts">	The Goal of Chess is to either Trap or Capture the opposing players king</p>
+<p class="font">	The Goal of Chess is to either Trap or Capture the opposing players king</p>
 <p class="desc"><b>Number of Players: </b>2</p>
 
 <p class="fonts">	</p>
@@ -57,13 +51,13 @@ border:1px solid red;
 <p class="desc"><b>Pieces:</b></p>
 
 
-<table id="tabledesc" style="background-color:orange;"">
+<table class="tabledesc">
 <th>Piece</th>
 <th>Picture</th>
 <th>Movement</th>
 <tr>
 <td> Pawn</td>
-<td><img  alt="Chess Graphic" src="blkpawn.png" width="30px" height="35px"></td>6
+<td><img  alt="Chess Graphic" src="blkpawn.png" width="30px" height="35px"></td>
 <td><p>First Move: Forward 1 or 2<br>Other Move: Forward 1<br>Attack:Diagonally left or right 1.</p></td>
 </tr>
 <tr>
@@ -106,7 +100,7 @@ Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or bac
 <p class="fonts2">Characters and their Case Value</p>
 
 
-<table id="tabledesc" style="background-color:orange">
+<table class="tabledesc">
 <th>Piece</th>
 <th>Picture</th>
 <th>Movement</th>
@@ -153,7 +147,7 @@ Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or bac
 </table>
 <hr>
 <p class="fonts2"> Piece Names</p>
-<table id="tabledesc" style="background-color:orange"> 
+<table class="tabledesc">
 <tr>
 <th>Piece</th>
 <th>Value</th>
@@ -185,7 +179,7 @@ Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or bac
 </table>
 <hr>
 <p class="fonts2"> Functions</p>
-<table id="tabledesc"  style="background-color:orange">
+<table class="tabledesc">
 <tr>
 <th>Name</th>
 <th>Parameter </th>
@@ -366,7 +360,7 @@ Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or bac
 
 <hr>
 <p class="fonts2">Models</p>
-<table id="tabledesc"  style="background-color:orange">
+<table class="tabledesc"  >
 <tr><td>Model</td><td>Contains instances of all model related functions as described above as well as stores information regarding gamestate such as movecount, and pieces lost</td></tr>
 <tr><td>View</td><td>Contains instances of all View related functions that will be used to access the gamestate functions and variables to modify the web page.</td></tr>
 </table>
