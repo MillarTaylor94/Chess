@@ -1,0 +1,219 @@
+/*GamePage.css*/
+/*This sheet stores all the style guidelines for my game page*/
+
+body{
+	
+	background-color:grey;
+	
+}
+p.desc{
+color:red;
+font-size:32px;
+
+}
+p.fonts{
+	color:red;
+	font-size:24px;
+}
+
+h1{
+	
+	margin:auto;
+	color:red;
+	text-shadow:2px 2px white;
+	text-align:center;
+	
+}
+h2{
+	
+	color:red;
+	text-shadow:2px 2px white;
+	text-align:center;
+	font-size:50px;
+}
+hr{
+	height:2px;
+	border:none;
+	background-color:red;
+}
+/*list links*/
+li a{
+	 display: block;
+    width: 200px;
+	text-align:center;
+}
+ul{
+	
+	padding: 15px;
+}
+/*link propertys*/
+a:hover{
+	background-color:orange;
+	}
+a{  color:black;
+	display:block;
+	width:auto;
+	padding:5px;
+	background-color:red;
+	border:solid black 1px;
+	border-radius:5px;
+	}
+#tabledesc{
+	margin:auto;
+	margin-bottom:30px;
+	background-color:grey;
+	border:solid;
+	border-color:red;
+	
+}
+
+#head{
+	width: 800px;
+height: 300px;
+border: 5px red;
+
+}
+/*used for the description pade header*/
+#deswrapper{
+	background-image:url("chessbackground.jpg");
+	background-size:auto;
+	margin:auto;
+	width:auto;
+	height:auto;
+	background-color:black;
+	font-size:50px;
+	border-radius: 25px;
+	border:3px solid red;
+	
+}
+#aboutwrap{
+	position:relative;
+	width:auto;
+	height:auto;
+	background-color:black;
+	border:2px solid red;
+	margin-top:30px;
+	border-radius: 25px;
+	border:3px solid red;
+	
+}
+/*main page header wrapper*/
+#wrapper{
+	
+	width:auto;
+	height:200px;
+	margin-top:30px;
+	background-color:black;
+	border-radius: 25px;
+	border:3px solid red;
+}
+
+
+/*uused for chess table*/
+#tablediv{
+	width:450px;
+	height:450px;
+	
+	
+}
+/*navBar*/
+
+#navsize2{
+	position:relative;
+top:0px;	
+	width:auto;
+	height:80%;
+	float:left;
+	
+}
+#softdesign{
+
+	width:80%;
+	height:auto;
+	
+}
+#rock{
+	left:70px;
+    top:20px;
+	position:relative;
+	height:60px;
+	width:50px;
+}
+#Pinput{
+	
+	position:static;
+	margin-left:20%;
+	margin-bottom:5%;
+}
+#LoginInfo{
+	
+	position:static;
+	left:20px;
+	width: auto;
+	height:auto;
+	
+	color:red;
+}
+.userinput{
+	left:20px;
+	height:auto;
+	width:auto;
+	
+}
+.gamestate{
+	position:relative;
+	margin-left:30%;
+	width:auto;
+	height:800px;
+    
+	color:red;
+}
+
+.griddiv{
+	position:static;
+	float:left;
+
+	padding: 15px;
+	border:2px dashed red;
+	width:auto;
+	height:auto;
+	background-color: black;
+}
+/*red border*/
+.redb{
+border-radius: 25px;
+	border:2px solid red;
+    background-color:black;
+ 
+}
+
+/*used for table*/
+.red{
+	background-color:red;
+	width: 45px;
+	height: 45px;
+	margin-left:10px;
+}
+/*used for table*/
+.black{
+	background-color:orange;
+	width:45px;
+	height:45px;
+	margin-left:10px;
+}
+/*used to define section magins*/
+section {
+	margin:auto;
+		width:400px;
+		height:400px;
+}
+footer{
+	margin-bottom:5px;
+	font-family:verdana;
+	margin-top:25px;
+	border:3px solid red;
+	border-radius:25px;
+	color:red;
+	background-color:black;
+	text-align:center;
+}

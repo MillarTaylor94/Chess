@@ -1,0 +1,195 @@
+{
+  "Objects":[ {
+    "name": "pawn",
+    "height": 1,
+    "width": 1,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 2,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 3,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 4,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 5,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 1,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 7,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 1,
+    "width": 0,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "rook",
+    "height": 0,
+    "width": 7,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "rook",
+    "height": 0,
+    "width": 0,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "knight",
+    "height": 0,
+    "width": 6,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "knight",
+    "height": 0,
+    "width": 1,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "bishop",
+    "height": 0,
+    "width": 5,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "bishop",
+    "height": 0,
+    "width": 2,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "king",
+    "height": 0,
+    "width": 4,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "queen",
+    "height": 0,
+    "width": 3,
+    "color": "white",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 1,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 2,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 3,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 4,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 5,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 6,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "pawn",
+    "height": 6,
+    "width": 7,
+    "color": "black",
+    "isAlive": true
+  }, {
+    "name": "pawn",
+    "height": 6,
+    "width": 0,
+    "color": "black",
+    "isAlive": true
+  }, {
+    "name": "rook",
+    "height": 7,
+    "width": 7,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "rook",
+    "height": 7,
+    "width": 0,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "knight",
+    "height": 7,
+    "width": 6,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "knight",
+    "height": 7,
+    "width": 1,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "bishop",
+    "height": 7,
+    "width": 5,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "bishop",
+    "height": 7,
+    "width": 2,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "king",
+    "height": 7,
+    "width": 3,
+    "color": "black",
+    "isAlive": true
+  },{
+    "name": "queen",
+    "height": 7,
+    "width": 4,
+    "color": "black",
+    "isAlive": true
+  }]
+}

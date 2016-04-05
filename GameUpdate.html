@@ -1,0 +1,23 @@
+
+Game Update
+Taylor M
+
+
+
+XML-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+JSON FILe: objects.json
+XMList function: Ajax.js
+Function call: Model1.js(Model.init())
+Modifies: Sets game pieces in starting position,  Provides data for game state startup.
+
+In order to do this assignment, I first had to decide what kind of data I would be looking to get.  After deciding that I was going to store my game pieces starting locations, and game
+data I then created my objects.json file.  After my data looked sufficient, I created my XMList function that used an XMLhttprequest to collect my json data. After that I had to parse
+the data into an array using json.parse.  However, this is where I hit a roadblock; I was unaware that by default Mozilla firefox stored 350mb of cache data.  This proved troublesome
+because when I as testing my json data, the cache had stored an old edition of my json file that was not parseable.  This issue took me several hours to figure out.... After I discovered that
+my data was not being properly accessed the rest of the assignment went smoothly.  first I had to edit my gameinit function to read its data from my new array, rather than my js generated
+data. and parse in my game state.
+
+
+
+

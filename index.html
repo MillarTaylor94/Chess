@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<!--about-->
+<head>
+<style>
+th, td{
+border:1px solid red;
+}</style>
+
+
+<link rel="stylesheet" type="text/css" href="GamePage.css">
+<script type="text/javascript" src="Ajax.js"></script>
+</head>
+<body>
+<div id="deswrapper">
+<h1 style="text-align:center"><b>Welcome to Chess</b></h1>
+</div>
+
+
+
+
+
+
+<div id="wrapper" style="height:auto" class="redb">
+<h2><b>Game Description</b></h2>
+<hr>
+<div id="navsize2">
+<ul>
+<li> 
+<a href="index.html" title="Home page"><b>Home Page</b></a>
+</li>
+<li>
+<a href="about.html" title="Game Grid"><b>Game Grid</b></a>
+</li>
+<li>
+<a href="checkpoint.html" title ="game Update"><b>GameUpdate</b></a>
+</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Chess" target ="_blank "title ="Chess Wiki"><b>Chess WikiPedia</b></a>
+</li>
+</ul>
+<div id="LoginInfo" >
+ <span class="userinput">Username:</span><br><input type="text" name="Username" value="Username"id="user" class="userinput"><br><span class="userinput">Password:</span><br> <input type="password" class="userinput" name="Password"value="*******" id="passinput"> 
+ <br><input id="submit" class="userinput" value="Submit" type="button" onclick="SendUser()"><br>
+ <span class="userinput" id="ajresponse"></span>
+</div>
+</div>
+
+
+<!-------------------Rules---------------->
+<div style="margin-left:20%">
+<p class="desc"><b>Goal:</b></p>
+<p class="fonts">	The Goal of Chess is to either Trap or Capture the opposing players king</p>
+<p class="desc"><b>Number of Players: </b>2</p>
+
+<p class="fonts">	</p>
+<!---------------Pieces------------>
+<p class="desc"><b>Pieces:</b></p>
+
+
+<table id="tabledesc" style="background-color:orange;"">
+<th>Piece</th>
+<th>Picture</th>
+<th>Movement</th>
+<tr>
+<td> Pawn</td>
+<td><img  alt="Chess Graphic" src="blkpawn.png" width="30px" height="35px"></td>6
+<td><p>First Move: Forward 1 or 2<br>Other Move: Forward 1<br>Attack:Diagonally left or right 1.</p></td>
+</tr>
+<tr>
+<td> Bishop</td>
+<td><img  alt="Chess Graphic" src="blkbishop.png" width="30px" height="35px"></td>
+<td>Unlimited Movement Diagonally Left or Right, Forward or Back.<br>
+Attacks:Directly</p></td>
+</tr>
+<tr>
+<td> Rook</td>
+<td><img  alt="Chess Graphic" src="blkrook.png" width="30px" height="35px"></td>
+<td><p> Unlimted movement Left, Right, Forward or Back<br>Attacks: Directly</p></td>
+</tr>
+<tr>
+<td> Knight</td>
+<td><img  alt="Chess Graphic" src="blkknight.png" width="30px" height="35px"></td>
+<td><p> Movement in an L type fashion<br> Forward 2, left or right 1<br>
+Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or back 1<br>Attacks:directly</p></td>
+</tr>
+<tr>
+<td> Queen</td>
+<td><img  alt="Chess Graphic" src="blkqueen.png" width="30px" height="35px"></td>
+<td>Unlimited movement left, right, forward, back, and diagonally<br> Attacks:Directly</p></td>
+</tr>
+<tr>
+<td> King</td>
+<td><img  alt="Chess Graphic" src="blkking.png" width="30px" height="35px"></td>
+<td>Limited Movement left,right,forward,back, and diagonally<br> limit 1 space<br> Attacks directly<br>Killing or trapping opposing King means victory</p></td>
+</tr>
+
+</table>
+
+<!---Software Design---->
+<div id="softdesign">
+<p class="desc"><b>Software Design:</b></p>
+<p class="fonts2">Constants</p>
+<hr>
+<p class="fonts"><b>NUM_OF_PLAYERS = 2,</b> max number of players.<br><b>MOVES_PER_TURN = 1</b> max number of moves per turn</p>
+<hr>
+<p class="fonts2">Characters and their Case Value</p>
+
+
+<table id="tabledesc" style="background-color:orange">
+<th>Piece</th>
+<th>Picture</th>
+<th>Movement</th>
+<th>Value</th>
+<tr>
+<td> Pawn</td>
+<td><img  alt="Chess Graphic" src="blkpawn.png" width="30px" height="35px"></td>
+<td><p>First Move: Forward 1 or 2<br>Other Move: Forward 1<br>Attack:Diagonally left or right 1.</p></td>
+<td>1</td>
+</tr>
+<tr>
+<td> Bishop</td>
+<td><img  alt="Chess Graphic" src="blkbishop.png" width="30px" height="35px"></td>
+<td>Unlimited Movement Diagonally Left or Right, Forward or Back.<br>
+Attacks:Directly</p></td>
+<td>2</td>
+</tr>
+<tr>
+<td> Rook</td>
+<td><img  alt="Chess Graphic" src="blkrook.png" width="30px" height="35px"></td>
+<td><p> Unlimted movement Left, Right, Forward or Back<br>Attacks: Directly</p></td>
+<td>3</td>
+</tr>
+<tr>
+<td> Knight</td>
+<td><img  alt="Chess Graphic" src="blkknight.png" width="30px" height="35px"></td>
+<td><p> Movement in an L type fashion<br> Forward 2, left or right 1<br>
+Back 2, left or right 1<br>left 2, forward or back 1<br> right 2, forward or back 1<br>Attacks:directly</p></td>
+<td>4</td>
+</tr>
+<tr>
+<td> Queen</td>
+<td><img  alt="Chess Graphic" src="blkqueen.png" width="30px" height="35px"></td>
+<td>Unlimited movement left, right, forward, back, and diagonally<br> Attacks:Directly</p></td>
+<td>5</td>
+</tr>
+<tr>
+<td> King</td>
+<td><img  alt="Chess Graphic" src="blkking.png" width="30px" height="35px"></td>
+<td>Limited Movement left,right,forward,back, and diagonally<br> limit 1 space<br> Attacks directly<br>Killing or trapping opposing King means victory</p></td>
+<td>6</td>
+</tr>
+
+</table>
+<hr>
+<p class="fonts2"> Piece Names</p>
+<table id="tabledesc" style="background-color:orange"> 
+<tr>
+<th>Piece</th>
+<th>Value</th>
+</tr>
+<tr>
+<td>Pawn</td>
+<td>P1-P8</td>
+</tr>
+<tr>
+<td>Bishop</td>
+<td>B1,B2</td>
+</tr>
+<tr>
+<td>Rook</td>
+<td>R1, R2</td>
+</tr>
+<tr>
+<td>Knight</td>
+<td>K1, K2</td>
+</tr>
+<tr>
+<td>Queen</td>
+<td>QUEEN</td>
+</tr>
+<tr>
+<td>King</td>
+<td>KING</td>
+<tr>
+</table>
+<hr>
+<p class="fonts2"> Functions</p>
+<table id="tabledesc"  style="background-color:orange">
+<tr>
+<th>Name</th>
+<th>Parameter </th>
+<th>Purpose</th>
+<th>Model or view.</th>
+</tr>
+<tr>
+<td>PawnMove( )</td>
+<td>Pawn Value</td>
+<td>Moves the Pawn according to his movement rules<br><b>Note:</b>Pawn also has a boolean value to determine move number</td>
+<td>Model</td>
+</tr>
+<tr>
+<td>BishopMove( )</td>
+<td>Bishop Value</td>
+<td>Moves the Bishop according to his movement rules.</td>
+<td>Model</td>
+</tr>
+<tr>
+<td>RookMove( )</td>
+<td>Rook Value</td>
+<td>Moves the Rook according to his movement rules.</td>
+<td>Model</td>
+</tr>
+<tr>
+<td>KnightMove( )</td>
+<td>Knight Value</td>
+<td>Moves the Knight according to his movement rules.</td>
+<td>Model</td>
+</tr>
+<tr>
+<td>QueenMove( )</td>
+<td>Queen Value</td>
+<td>Moves the Queen according to her movement rules.</td>
+<td>Model</td>
+</tr>
+<tr>
+<td>KingMove( )</td>
+<td>King Value</td>
+<td>Moves the King according to his movement rules.</td>
+<td>Model</td>
+</tr>
+ <tr>
+ <td>KingCheck()</td>
+ <td>None</td>
+ <td>Checks if king has been killed</td>
+ <td>Model</td>
+ </tr>
+  <tr>
+ <td>checkAttack()</td>
+ <td>Rook, Bishop, Knight, Queen, King</td>
+ <td>Contains the rules for attacking another piece.</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>Move</td>
+ <td>Any Piece</td>
+ <td>Calls respective move set for each character based on what unit has been entered.</td>
+ </tr>
+  <tr>
+ <td>PawnAttack()</td>
+ <td>Pawn value</td>
+ <td>Pawn special attack value</td>
+ <td>Model</td>
+ </tr>
+  <tr>
+ <td>RemovePiece()</td>
+ <td>Rook, Bishop, Knight, Pawn, Queen, King</td>
+ <td>If piece was killed in battle it is removed.</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>gameinit()</td>
+ <td>none</td>
+ <td>Initializes game</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakeQueen</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates Queen Object</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakeKing</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates King Object</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakeBishop</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates Bishop Object</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakeKnight</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates Knight Object</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakeRook</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates Rook Object.</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>MakePawn</td>
+ <td>name,vertical positicon,Heightposition, color, isAlive</td>
+ <td>Creates Pawn Object</td>
+<td>Model</td>
+ </tr>
+ <tr>
+ <td>gameOver</td>
+ <td>King</td>
+ <td>If King is Dead, Game over</td>
+ <td>Model</td>
+ </tr>
+  <tr>
+ <td>toSquare</td>
+ <td>Returns array value.</td>
+  <td>Used to get the Array location needed for each piece.</td>
+  
+  <td>Model</td>
+  
+ </tr>
+ 
+ <td>state</td>
+ <td>moveturn, movecount, unit counts</td>
+ <td>Stores gamestate variables</td>
+ <td>Model</td>
+ </tr>
+ <tr>
+ <td>changeturn</td>
+ <td>None,Updates the view to new turn property</td>
+ <td>Modifies Html</td>
+  <td>View</td>
+ </tr>
+  <tr>
+ <td>changePlayer</td>
+ <td>None,updates the view to new player</td>
+ <td>Modifies Html</td>
+  <td>View</td>
+ </tr>
+  <tr>
+ <td>changePiece</td>
+ <td>None,Updates the Lost Pieces field for the player</td>
+ <td>Modifies Html</td>
+  <td>View</td>
+ </tr>
+ <tr>
+ <td>UpdateState</td>
+ 
+ <td>Updates state for the board</td>
+ <td>Calls changeplayer changeturn and changepiece function</td>
+  <td>View</td>
+ </tr><tr>
+ <td>getImage</td>
+ <td>Used to get the image needed for each square</td>
+ <td>Modifies Html</td>
+ <td>View</td>
+ </tr>
+ <tr>
+ <td>getImage</td>
+ <td>Used to get the image needed for each square</td>
+ <td>Modifies Html</td>
+  <td>View</td>
+ </tr>
+  <tr>
+ <td>getGen</td>
+ <td>Gets generate function</td>
+ <td>Modifies Html</td>
+  <td>View</td>
+ </tr>
+ 
+</table>
+
+<hr>
+<p class="fonts2">Models</p>
+<table id="tabledesc"  style="background-color:orange">
+<tr><td>Model</td><td>Contains instances of all model related functions as described above as well as stores information regarding gamestate such as movecount, and pieces lost</td></tr>
+<tr><td>View</td><td>Contains instances of all View related functions that will be used to access the gamestate functions and variables to modify the web page.</td></tr>
+</table>
+</div><!---Software Design End---->
+<p><sub style="color:red">Background Picture provided by:https://0.s3.envato.com/files/105558141/chess-metal-falling-pr.jpg</sub></p>
+</div><!---end of table/rules div-->
+
+
+</div><!----main div end------>
+<footer>
+
+<p> T&J Limited</p>
+<p> 2015</p>
+
+</footer>
+</body>
+</html>

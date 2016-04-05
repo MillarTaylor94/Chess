@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Chess</title>
+<link rel="stylesheet" type="text/css" href="GamePage.css">
+
+<!---javascript--<script type="text/javascript" src="gridscript.js">-->
+<script type="text/javascript" src="Model1.js"></script>
+<script type="text/javascript" src="View1.js"></script>
+<script type="text/javascript" src="Ajax.js"></script>
+
+
+</head>
+<body style="height:800px;">
+<div id="deswrapper">
+<h1>Game Grid</h1>
+
+</div>
+<div id="aboutwrap">
+
+
+<nav id="navsize2">
+
+
+<ul>
+<li>
+<a href="index.html" title="Home Page"><b>Home Page</b></a>
+</li>
+<li>
+<a href="about.html"  title="Game Grid"><b>Game Grid</b></a>
+</li>
+<li>
+<a href="GameUpdate.html" title ="game Update"><b>GameUpdate</b></a>
+</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Chess" target ="_blank"title ="Chess Wiki"><b>Chess WikiPedia</b></a>
+</li>
+</ul>
+<span id="timestamps" class="userinput"></span>
+<input type="button" value="Clear Local Storage" onclick="clearStorage()">
+
+</nav>
+
+
+
+
+
+
+<div id="gameState"class="gamestate">
+<br>
+<ul>
+<li><span>Player:<span id="play" class="gamestate"> </span></span></li>
+<li><span>Current turn:<span id="turn" class="gamestate">  </span></span>
+</li>
+<li>Pieces Lost:<span id="lost" class="gamestate"></span></li>
+<li>P1 Name:<span id="p1name" class="gamestate"></span></li>
+<li>P2 Name:<span id="p2name" class="gamestate"></span></li>
+
+</ul>
+
+<div id="Pinput">
+Set <select><option value="P1">P1</option><option value="P2">P2</option></select>name: <input type="text" name="Name" id="inputb"><br>
+<input id="enter"  value="click" type="button" onclick="setName;">
+<input id="reset" value="reset game" type="button" onclick="View.resetter();">
+
+</div>
+    <div id="clicklocation"></div>
+<div id="grid" class="griddiv">
+
+</div><!--griddiv end-->
+
+<img id="rock" src="rock.png"/>
+</div>
+
+</div>
+
+
+
+</body>
+
+</html>
+
+window.onload=View.init();
