@@ -1,13 +1,10 @@
-//console.log("Model");
-function toSquare(h,v){
-	return (((21+h))+((v)*10));
-}
 
+var Bool={False:0, True:1};
 //------------------------------------------------------------------------------------------------------------------------------------------------
 var Model={
 	
 	
-		player:"white",
+		player:"White",
 		p1name:"White",
 		p2name:"Black",
 		movecount:4,
@@ -16,6 +13,7 @@ var Model={
 		p1lost:2,
 		p2lost:1,
 	gridModel:new Array(120),
+
 	
 	
    reset:function(){
@@ -27,206 +25,219 @@ var Model={
 	
     },
  init:function(){
-	 console.log("Model Init Fucntion");
+	 console.log("Model Init Function");
 	 Model.initArray();
-	 var x=XMList();
-	 Model.gameinit(x);
-	 View.getViewData(x);
+	
 	 },
-
+//function initializes every array element to none.
 initArray: function(){
 console.log("Initializing Array");
 	var empty=new Model.makeEmpty("none","none");
 	
 	for(var i=0;i<120;i++){
-		
 	//this.gridModel.push(empty);
 	Model.gridModel[i]=empty;
 
 	}
 	
 },
+    getViewData:function(arr){
+        this.p1name=arr.p1name;
+        this.p2name=arr.p2name;
+         this.player  
+            //p1name:"White",
+            //p2name:"Black",
+            //movecount:4,
+            //p1turn:0,
+            //p2turn:3,
+            //p1lost:2,
+            //p2lost:1,
 
- GameOver:function(king){
-	 if (king.isAlive != false) {
-	 } else return true;
- },
- gameinit:function(arr){
+    },
+    gameinit:function(arr){
 
 
 	 //console.log("arr length"+ arr.length);
 	console.log("Called GameInit function.");
 	//white units
-	console.log("Initializing units.");
-
 	 for(var i=1;i<arr.length;i++){
-
-		 
-		 this.gridModel[toSquare(arr[i].width,arr[i].height)]=arr[i];
+ 		 this.gridModel[toSquare(arr[i].width,arr[i].height)]=arr[i];
+		 //console.log(toSquare(arr[i].width,arr[i].height))
 	 }
-console.log("Adding units to gridModel Array.");
+    },
+
+    moveRook:function(character,secondClick){
+        console.log(" In moveRook() function");
+        //first Evaluate if it is a valid move
+        //this function has a bug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+if(secondClick>START_INDEX&& secondClick<END_INDEX) {
+
+//sentinal for horizontal move.
+   var value=secondClick-toSquare(character.width,character.height);
+    console.log("value "+value);
+
+    //previous index for clearing previous square.
+ var previousIndex = toSquare(character.width, character.height);
+    //you minus 1 because grid indexes are 0-7
+    //if value<7 and value>-7
+
+    if((secondClick%10)-1==character.width) {
+
+
+
+        if (this.gridModel[secondClick].name == "none") {
+
+            this.gridModel[secondClick] = character;
+
+
+
+            character.width = getWidth(secondClick);
+            character.height = getHeight(secondClick, character.width);
+
+
+            this.gridModel[previousIndex] = null;
+            this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+            regenerate();
+        }
+
+        }else if(value<=HOR_MAX&&value>=-HOR_MAX) {
+        //if(){}
+                // if(getHeight(secondClick, character.width)>character.height||getHeight(secondClick, character.width)<character.height){
+
+                 if(Math.floor(getHeight(secondClick, character.width))>character.height||Math.ceil(getHeight(secondClick,character.width))<character.height){
+                     console.log("nice try");
+                 }else{
+
+                     console.log("greater than");
+                     this.gridModel[secondClick] = character;
+
+
+
+                     character.width = getWidth(secondClick);
+                     character.height = getHeight(secondClick, character.width);
+
+
+                     this.gridModel[previousIndex] = null;
+                     this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+                     regenerate();
+                 }
+
+
+
+        console.log("in horizontal move");
+
+
+    }
+else{
+        View.updateClickResult("Invalid move");
+           console.log("invalid Move");
+        }
+
+
+
+
+}//secondClick>START_INDEX&& secondClick<END_INDEX
+    },
+	movePawn:function(character,secondClick){
+
+
+        //notes:---------------------------------------------------------------------------
+        //Fix pawn moving backwards;
+        //
+        //
+        var previousIndex = toSquare(character.width, character.height);
+        var moveValue=secondClick-previousIndex;
+        console.log(moveValue);
+        if(character.moveCount==0){
+            if(Math.abs(moveValue)==10||Math.abs(moveValue)==20) {
+                character.moveCount++;
+                this.gridModel[secondClick] = character;
+
+
+
+                character.width = getWidth(secondClick);
+                character.height = getHeight(secondClick, character.width);
+
+
+                this.gridModel[previousIndex] = null;
+                this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+                regenerate();
+            }
+
+        }else{
+            if(Math.abs(moveValue)==10) {
+                this.gridModel[secondClick] = character;
+                character.width = getWidth(secondClick);
+                character.height = getHeight(secondClick, character.width);
+
+                //clear old space
+                this.gridModel[previousIndex] = null;
+                this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+                regenerate();
+            }else if(Math.abs(moveValue)==20){
+                View.updateClickResult("Invalid move, Pawn can only move one space!");
+            }
+        else{
+                View.updateClickResult("Invalid move");
+                console.log("Invalid Move");
+            }
+        }
+		
+	},//end of movepawn
+	moveKnight:function(character, secondClick){
+        var previousIndex = toSquare(character.width, character.height);
+        var MoveTotal=previousIndex-secondClick;
+        if(Math.abs(MoveTotal)==19||Math.abs(MoveTotal)==21||Math.abs(MoveTotal)==8||Math.abs(MoveTotal)==12){
+            this.gridModel[secondClick] = character;
+
+            character.width = getWidth(secondClick);
+            character.height = getHeight(secondClick, character.width);
+
+
+            this.gridModel[previousIndex] = null;
+            this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+            regenerate();
+
+        }
+        else{  View.updateClickResult("Invalid move");
+            console.log("invalid Move");
+        }
 
 },
-	Move:function(unit,vertical,horizontal){	
-	if(unit.name=pawn)
-	{
-		movePawn(unit,vertical,horizontal);
-	}
-	else if(unit.name=rook)
-	{
-		moveRook(unit,vertical,horizontal);
-	}
-	else if(unit.name=knight)
-	{
-		moveKnight(unit,vertical,horizontal);
-	}
-	else if(unit.name=bishop)
-	{
-		moveBishop(unit,vertical,horizontal);
-	}
-	else if(unit.name=king)
-	{
-		moveKing(unit,vertical,horizontal);
-	}
-	else if(unit.name=queen)
-	{
-		moveQueen(unit,vertical,horizontal);
-	}},
-	movePawn:function(pawn,vertical,horizontal){
-		if(pawn.isAlive==true)
-		{
-		checkPawn(this);
-		if(pawn.color==black)
-		{
-			
-			
-		if(horizontal==(pawn.height-pawn.moveHeight)){
-				if(vertical==(pawn.width-1||pawn.width+1))
-				{
-					if(checkAttack(vertical,horizontal)==false)
-					{
-						return;
-					}
-					else{
-						var deadunit=gridModel[horizontal][vertical]
-					deadunit.isAlive=false;
-					gridModel[horizontal][vertical]=pawn;
-					pawn.moveHeight=1;
-					return;
-					}
-				}
-			
-			if(GridModel[vetrical][horizontal]==NULL)
-				{
-					GridModel[vertical][horizontal]=pawn;
-					GridModel[vertical][horizontal+pawn.moveHeight]=NULL;
-					pawn.moveHeight=1;
-				}
-				else
-				{return;
-			     }
-			
-				
-					
-					
-			}
-		}
-		else{//color white
-				if(horizontal==(pawn.height+pawn.moveHeight)){
-					if(vertical==(pawn.width-1||pawn.width+1)){
-					     if(checkAttack(vertical,horizontal)==false){
-						return;
-					}
-					else{
-						var deadunit=gridModel[horizontal][vertical]
-					deadunit.isAlive=false;
-					gridModel[pawn.height][pawn.width]=NULL;
-					gridModel[horizontal][vertical]=pawn;
-					pawn.height=vertical;
-					pawn.width=horizontal;
-					pawn.moveHeight=1;
-					return;
-					}
-				}
-		if(GridModel[horizontal][vertical]==NULL)
-				{
-					GridModel[horizontal][vertical]=pawn;
-					GridModel[pawn.width][vertical]=NULL;
-					pawn.height=vertical;
-					pawn.width=horizontal;
-					pawn.moveHeight=1;
-				}
-				else
-				{return;
-			    }	
-		}
-	
-	}
-		}
-	},//end of movepawn
-moveKing:function(king,vertical,horizontal){
-	if(vertical==(king.height-maxheight)||vertical==(king.height+maxheight))
-	{
-		if(horizontal==(king.height-maxheight)||horizontal==(king.height+maxheight))
-		{
-			if(checkAttack(vertical,horizontal)==false)
-			{
-				gridModel[horizontal][vertical]=king;
-				king.height=vertical;
-				king.width=horizontal;
-			}
-			else
-			{
-				deadunit=gridModel[horizontal][vertical];
-				deadunit.isAlive=false;
-				gridModel[horizontal][vertical]=king;
-				king.height=vertical;
-				king.width=horizontal;
-			}
-		}
-	}
-	else if(horizontal==(king.height-maxheight)||horizontal==(king.height+maxheight))
-	{
-		if(vertical==(king.height-maxheight)||vertical==(king.height+maxheight)){
-		if(checkAttack(vertical,horizontal)==false)
-			{
-				gridModel[horizontal][vertical]=king;
-				king.height=vertical;
-				king.width=horizontal;
-			}
-			else
-			{
-				deadunit=gridModel[horizontal][vertical];
-				deadunit.isAlive=false;
-				gridModel[horizontal][vertical]=king;
-				king.height=vertical;
-				king.width=horizontal;
-			}//-------------------------------------------------------------still needs to check for out of  bounds-------------------------
-		}
-		
-	}
-}	,
-	moveKnight:function(knight,vertical,horizontal){
-	
-},
-	moveBishop:function(bishop,vertical,horizontal){	
+	moveBishop:function(character,secondClick){
+        var previousIndex = toSquare(character.width, character.height);
+        var heightDif=getHeight(secondClick,character.width)-character.height;
+        totalMove=secondClick-previousIndex;
+
+        if(totalMove%11==0||totalMove%9==0){
+            this.gridModel[secondClick] = character;
+
+            character.width = getWidth(secondClick);
+            character.height = getHeight(secondClick, character.width);
+
+
+            this.gridModel[previousIndex] = null;
+            this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+
+            regenerate();
+        }else{
+            View.updateClickResult("Invalid move");
+            console.log("invalid Move");
+        }
+
+
 },
 	moveQueen:function(queen,vertical,horizontal){
 	
 },
-	changeTurn:function(){
-	if(this==black)
-	{return "white";}
- else
-  {return "black";}
-},
 
 	
-	checkPawn:function(pawn){
-	if(movecount>0){
-		return this.moveHeight=1;
-	}
-	},
 	getModel:function(horizontal,vertical){
 	return gridModel[horizontal][vertical];
 	},
@@ -234,17 +245,7 @@ moveKing:function(king,vertical,horizontal){
 	this.name=name;
 	this.color=color;
 },
- getName:function(value){
-	 if(value==1){
-		 return Model.p1name;
-
-	 }else if(value==2){
-		 return Model.p2name;
-	 }else{
-		 alert("Error inside GetName!!!");
-	 };
-	 
- },//-----------------------------------------------Getters---------------------------
+//-----------------------------------------------Getters---------------------------
 getPlayer:function(){
 	
 	console.log("Model.getPlayer Called");
@@ -257,11 +258,74 @@ else{
 	Model.player="White";
 }
 return Model.player;
+},
+
+    changeTurn: function(){
+        if(this.player="white"){
+            
+            this.player="black";
+            return "Black";
+        }else if(this.player="black"){
+            this.player="white";
+            return "White";
+        }
+    },
+	gridref: function(col,row){
+		//console.log("In Gridrerence");
+		var x=Model.gridModel[toSquare(col, row)];
+
+	return Model.gridModel[toSquare(col,row)];
+},
+
+    startMove:function(character,secondClick){
+        console.log("startMove() Called");//firstclick=toSquare(character.width,character.height);//passed into next function
+if(character.color==this.player) {
+    if (character.name == "rook") {
+        console.log("Rook Selected, calling MoveRook function.");
+
+        this.moveRook(character, secondClick);
+    } else if (character.name == "knight") {
+        this.moveKnight(character, secondClick);
+        console.log("Knight Selected, calling moveKnight function.");
+    } else if (character.name == "bishop") {
+
+        console.log("Bishop Selected, calling moveBishop function.");
+        this.moveBishop(character, secondClick);
+    } else if (character.name == "queen") {
+
+        console.log("Queen Selected, calling moveQueen function.");
+    } else if (character.name == "king") {
+
+        console.log("King Selected, calling moveKing function.");
+    } else if (character.name == "pawn") {
+        this.movePawn(character, secondClick);
+        console.log("Pawn Selected, calling movePawn function.");
+    } else {
+        console.log("error inside Start Move function");
+    }
+}else{
+    
+    updateClickResult("It is Not your Turn!");
+}
+    },
+
+
+
+getViewData:function(arr){
+
+    //Function:getViewData
+//Parameters:json array
+//returns: none
+//Updates view data for View and Model.
+    Model.player=arr[0].Playerturn;
+    Model.p1name=arr[0].p1name;
+    Model.p2name=arr[0].p2name;
+    Model.lost=arr[0].pieceslost;
+    Model.pturn=arr[0].currentturn;
 }
 
-
-
-
 };
+
+
 
 //model

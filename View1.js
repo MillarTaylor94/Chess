@@ -1,64 +1,17 @@
-//<script type="text/javascript" src="model.js"></script>
-
-	//Function:addHandlers
-//Parameters:
-//returns: \
-//Purpose add clickhandlers to game grid.
-function addHandlers(){
-console.log("calling AddHandlers Function");
-	var tablediv=document.getElementById("grid");
-var cells=tablediv.getElementsByTagName("td");
-
-	for(var i=0;i<cells.length;i++){
-cells[i].onclick=clickgrid;
-	}
-}
-function clickgrid(){
-	var click=document.getElementById("tablediv");
-	var col=this.cellIndex;
-	var row=this.parentNode.rowIndex;
-    console.log("row = "+ row +"col= "+ col);
-	var cell=click.rows[row].cells[col];
-	cell.style.backgroundColor="blue";
-    var message = document.getElementById("clicklocation");
-    message.innerHTML="You Clicked at grid element Row: "+ row.toString()+" Column: "+col.toString();
-}
-
-/*Boolean ValueChanger
-Used in Generate*/
-change=function(value){
-	if(value==false)
-	{ value=true;}
-else 
-{ value=false;}
-
-	return value;
-};
-/*Is Even
-Used to evaluate if value is even or odd, Used in Generate*/
-	isEven=function(value){
-    if (value%2 == 0)
-        return true;
-    else
-        return false;
-};
-
+//cript type="text/javascript" src="model.js"></script>
 
 var View;
 View = {
+    previouschar: null,
 	changer: true,
-
+	clickcount:0,
 
 	init: function () {
 		console.log("View.Init Called, initializing View");
-
-		Model.init();
-		var gridiv = document.getElementById("grid");
-		gridiv.innerHTML = View.generate(8, 8);
-		animate();
+      
 		View.UpdateState();
 
-		addHandlers();
+
 
 		//XMList();
 	},
@@ -161,7 +114,7 @@ View = {
 
 				gridcolor = change(gridcolor);
 				if (View.getImage(i, j)) {
-					html += "<td class=\"" + gridclass + "\"><img src=\"" + View.getImage(i, j) + "\" width=30px; height=35px;></td>";
+					html += "<td class=\"" + gridclass + "\"><img src=\"" + View.getImage(i, j) + "\" width=35px; height=35px;></td>";
 				} else {
 					html += "<td class=\"" + gridclass + "\"></td>";
 				}
@@ -181,13 +134,7 @@ View = {
 
 	},
 
-	changeturn: function () {
-
-		return document.getElementById("turn").innerHTML = "0";
-
-
-	},
-	changePiece: function () {
+    changePiece: function () {
 		document.getElementById("lost").innerHTML = "0";
 	},
 	changePname: function () {
@@ -209,79 +156,72 @@ View = {
 	//	View.changeturn();
 		//View.changePname();
 	},
+	//Function:getViewData
+//Parameters:json array
+//returns: none
+//Updates view data for View and Model.
 	getViewData:function(arr){
 		console.log("called getViewData");
+        //function is used to set up the game stats
 		var player=document.getElementById("play").innerHTML=arr[0].Playerturn;
 		var p1name=document.getElementById("p1name").innerHTML=arr[0].p1name;
 		var p2name=document.getElementById("p2name").innerHTML=arr[0].p2name;
 		var pturn=document.getElementById("turn").innerHTML=arr[0].currentturn;
 		var lost=document.getElementById("lost").innerHTML=arr[0].pieceslost;
-		player=arr[0].Playerturn;
-		player=arr[0].Playerturn;
-		p1name="arr[0].p1name";
-		p2name=arr[0].p2name;
-		lost=arr[0].pieceslost;
-		pturn=arr[0].currentturn;
+	
+	},
 
-
-
+	//Function:change turn
+	//parameters: The players turn
+//Updates view with whos turn it is
+	changeTurn:function(turn){
+	document.getElementById("play").inerHTML=turn;
 	},
 	resetter: function () {
-//
-		View.init();
+ var char=document.getElementById("clickresult");//resets the character field on webpage
+        char.innerHTML="";
+		initialize();
+
 		//alert("this Button is in progress but calls update game state and Model.reset");
-	}
-};
+	},
+	updateClickResult:function(value){
+		var char=document.getElementById("clickresult");//resets the character field on webpage
+		char.innerHTML=value;
+	},
+	evaluateSquare:function(col,row){
+       // console.log("evaluateSquare Called");
+if(View.clickcount==Bool.False) {
+var response=document.getElementById("clickresult");
+    var reference=Model.gridref(col,row);
 
-/*Makes A moving Rock, Called by View.Init*/
-function animate(){
-	var right=0;
-	var totalTime=0;
+		if(reference.name=="none")
+        {
+            response.innerHTML="Empty Square";
+            View.previouschar=null;
+        }
+    else{
+
+            View.clickcount++;
+            View.previouschar=reference;
+            response.innerHTML=reference.color+ " " +reference.name;
+           // View.clickcount++;
+        }
 	
-	  Rock = document.getElementById('rock');
-               rock.style.position= 'relative'; 
-			   rock.style.top = '20px'; 
-	function down(){
-		rock.style.top=parseInt(rock.style.top)+ 10 +'px';
-		if(parseInt(rock.style.top)>200){
-			rock.style.top='20px';
-		}
-	
-		totalTime+=100;
-		if(totalTime<5000){
-			setTimeout(down,100);
-		}
-	}
-	setTimeout(down,100);
+}else if(View.clickcount==Bool.True){
+var character=View.previouschar
+  var secondClick=toSquare(col,row);
+    initMove(character,secondClick);
+    View.clickcount--;
+
 }
-//-------------------------------------------------------------------------------------------------------
-window.onload=View.init;	
-
-setName=function(){
-
-    console.log("setName called, setting name");
-	var select=document.getElementById("selected").value;
-    var input=document.getElementById("inputb").value;
-    console.log(" select Value "+select);
-    console.log(" input Value "+input);
-	if(select=="P1")
-    {
-        document.getElementById("p1name").innerHTML=input;
-    }else if(select=="P2")
-    {console.log("P");
-        document.getElementById("p2name").innerHTML=input;
-    }
-
-
-	//alert(t);
-	
+		
+	}
 };
-changeTurn=function(){
-	if(turn==White)
-	{return turn="Black";}
-     else
-	{return turn="White";}
-};
+
+//-------------------------------------------------------------------------------------------
+
+
+
 
 
 
