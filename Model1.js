@@ -89,17 +89,23 @@ if(secondClick>START_INDEX&& secondClick<END_INDEX) {
         if (this.gridModel[secondClick].name == "none") {
 
             this.gridModel[secondClick] = character;
-
-
-
             character.width = getWidth(secondClick);
             character.height = getHeight(secondClick, character.width);
-
-
             this.gridModel[previousIndex] = null;
             this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
-
+            changeTurn ();
             regenerate();
+        }
+        else if(this.Attack(character,secondClick)==Bool.True){
+            this.gridModel[secondClick] = character;
+            character.width = getWidth(secondClick);
+            character.height = getHeight(secondClick, character.width);
+            this.gridModel[previousIndex] = null;
+            this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+            changeTurn ();
+            regenerate();
+        }
+        else{updateClickResult("Invalid Move");
         }
 
         }else if(value<=HOR_MAX&&value>=-HOR_MAX) {
@@ -109,20 +115,24 @@ if(secondClick>START_INDEX&& secondClick<END_INDEX) {
                  if(Math.floor(getHeight(secondClick, character.width))>character.height||Math.ceil(getHeight(secondClick,character.width))<character.height){
                      console.log("nice try");
                  }else{
-
-                     console.log("greater than");
-                     this.gridModel[secondClick] = character;
-
-
-
-                     character.width = getWidth(secondClick);
-                     character.height = getHeight(secondClick, character.width);
+                     if(this.Attack(character,secondClick)==Bool.True) {
+                         console.log ("greater than");
+                         this.gridModel[secondClick] = character;
 
 
-                     this.gridModel[previousIndex] = null;
-                     this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
+                         character.width = getWidth (secondClick);
+                         character.height = getHeight (secondClick, character.width);
 
-                     regenerate();
+
+                         this.gridModel[previousIndex] = null;
+                         this.gridModel[previousIndex] = new this.makeEmpty ("none", "none");
+
+                         regenerate ();
+                         changeTurn ();
+                     }
+                     else{
+                         updateClickResult("Invalid Move");
+                         }
                  }
 
 
@@ -132,8 +142,8 @@ if(secondClick>START_INDEX&& secondClick<END_INDEX) {
 
     }
 else{
-        View.updateClickResult("Invalid move");
-           console.log("invalid Move");
+        updateClickResult("Invalid move");
+
         }
 
 
@@ -164,7 +174,7 @@ else{
 
                 this.gridModel[previousIndex] = null;
                 this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
-
+                changeTurn();
                 regenerate();
             }
 
@@ -177,7 +187,7 @@ else{
                 //clear old space
                 this.gridModel[previousIndex] = null;
                 this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
-
+                changeTurn();
                 regenerate();
             }else if(Math.abs(moveValue)==20){
                 View.updateClickResult("Invalid move, Pawn can only move one space!");
@@ -193,6 +203,7 @@ else{
         var previousIndex = toSquare(character.width, character.height);
         var MoveTotal=previousIndex-secondClick;
         if(Math.abs(MoveTotal)==19||Math.abs(MoveTotal)==21||Math.abs(MoveTotal)==8||Math.abs(MoveTotal)==12){
+          if(this.Attack(character,secondClick)==Bool.True){
             this.gridModel[secondClick] = character;
 
             character.width = getWidth(secondClick);
@@ -201,12 +212,16 @@ else{
 
             this.gridModel[previousIndex] = null;
             this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
-
+            changeTurn();
             regenerate();
+          }else{
+
+              updateClickResult("Invalid Move");
+          }
 
         }
-        else{  View.updateClickResult("Invalid move");
-            console.log("invalid Move");
+        else{ updateClickResult("Invalid move");
+
         }
 
 },
@@ -216,6 +231,7 @@ else{
         totalMove=secondClick-previousIndex;
 
         if(totalMove%11==0||totalMove%9==0){
+            if(this.Attack(character,secondClick)==Bool.True) {
             this.gridModel[secondClick] = character;
 
             character.width = getWidth(secondClick);
@@ -224,11 +240,15 @@ else{
 
             this.gridModel[previousIndex] = null;
             this.gridModel[previousIndex] = new this.makeEmpty("none", "none");
-
+            changeTurn();
             regenerate();
+            }
+            else{
+                updateClickResult("Invalid Move");
+            }
         }else{
-            View.updateClickResult("Invalid move");
-            console.log("invalid Move");
+            updateClickResult("Invalid move");
+
         }
 
 
@@ -246,26 +266,14 @@ else{
 	this.color=color;
 },
 //-----------------------------------------------Getters---------------------------
-getPlayer:function(){
-	
-	console.log("Model.getPlayer Called");
-if(Model.player=="White")
-{
-	Model.player="Black";
-    
-}
-else{
-	Model.player="White";
-}
-return Model.player;
-},
+
 
     changeTurn: function(){
-        if(this.player="white"){
+        if(this.player=="white"){
             
             this.player="black";
             return "Black";
-        }else if(this.player="black"){
+        }else if(this.player=="black"){
             this.player="white";
             return "White";
         }
@@ -280,6 +288,7 @@ return Model.player;
     startMove:function(character,secondClick){
         console.log("startMove() Called");//firstclick=toSquare(character.width,character.height);//passed into next function
 if(character.color==this.player) {
+
     if (character.name == "rook") {
         console.log("Rook Selected, calling MoveRook function.");
 
@@ -307,6 +316,20 @@ if(character.color==this.player) {
     
     updateClickResult("It is Not your Turn!");
 }
+    },
+    Attack:function(character,secondClick){
+        var Character2=this.gridModel[secondClick];
+      if(Character2.color!=character.color){
+          return Bool.True;
+      }else if(Character2.color==character.color){
+          return Bool.False;
+
+        }else if(character2.name=="none"){
+          return Bool.True;
+      }else{
+          return Bool.True;
+      }
+
     },
 
 

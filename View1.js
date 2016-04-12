@@ -8,8 +8,8 @@ View = {
 
 	init: function () {
 		console.log("View.Init Called, initializing View");
-      
-		View.UpdateState();
+
+		//View.UpdateState();
 
 
 
@@ -128,11 +128,6 @@ View = {
 		return html;
 
 	},
-	changePlayer: function () {
-		console.log("changePlayer");
-		return document.getElementById("play").innerHTML = Model.getPlayer();
-
-	},
 
     changePiece: function () {
 		document.getElementById("lost").innerHTML = "0";
@@ -150,12 +145,7 @@ View = {
 			alert("bad changer value in changeplayer");
 		}
 	},
-	UpdateState: function () {
-		//View.changePlayer();
-		//View.changePiece();
-	//	View.changeturn();
-		//View.changePname();
-	},
+
 	//Function:getViewData
 //Parameters:json array
 //returns: none
@@ -175,7 +165,7 @@ View = {
 	//parameters: The players turn
 //Updates view with whos turn it is
 	changeTurn:function(turn){
-	document.getElementById("play").inerHTML=turn;
+	document.getElementById("play").innerHTML=turn;
 	},
 	resetter: function () {
  var char=document.getElementById("clickresult");//resets the character field on webpage

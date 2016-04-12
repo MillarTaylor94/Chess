@@ -5,7 +5,7 @@
       "p1lost":0,
       "p2lost":0,
       "currentturn":0,
-      "Playerturn":"white",
+      "Playerturn":"black",
       "pieceslost": 0
 
     },

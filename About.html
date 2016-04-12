@@ -8,6 +8,7 @@
 <script type="text/javascript" src="Model1.js"></script>
 <script type="text/javascript" src="View1.js"></script>
 <script type="text/javascript" src="Ajax.js"></script>
+    <script type="text/javascript" src="Controler.js"></script>
 
 
 </head>
@@ -49,23 +50,26 @@
 <div id="gameState"class="gamestate">
 <br>
 <ul>
-<li>Player:<span id="play" ></span></li>
-<li>Current turn:<span id="turn"></span></li>
-<li>Pieces Lost:<span id="lost"></span></li>
-<li>P1 Name:<span id="p1name"></span></li>
-<li>P2 Name:<span id="p2name"></span></li>
-
+<li>Player <span id="play" ></span>'s turn</li>
+<li>Turn Count: <span id="turn"></span></li>
+<li>Pieces Lost: <span id="lost"></span></li>
+<li>P1 Name: <span id="p1name"></span></li>
+<li>P2 Name: <span id="p2name"></span></li>
 </ul>
-    <div id="reset" >
+
 <div id="grid" class="griddiv">
 
 </div><!--griddiv end-->
-    <input id="reset" value="reset game" type="button" onclick="View.resetter();">
+    <div id="resetdiv" >
+        <p class="font" id="clicklocation"></p>
+        <p class="font" id="clickresult"></p>
+        <input id="reset" value="reset game" type="button" onclick="View.resetter();">
     </div>
+
 <img id="rock" src="rock.png"/>
 </div>
     <div id="Pinput">
-        Set <select id="selected"><option value="P1">P1</option><option value="P2">P2</option></select>name: <input type="text" name="Name" id="inputb"><br>
+        <p class="font">Set <select id="selected"><option value="P1">P1</option><option value="P2">P2</option></select>name: <input type="text" name="Name" id="inputb"><br></p>
         <input id="enter"  value="Change Name" type="button" onclick=setName()>
 
 
